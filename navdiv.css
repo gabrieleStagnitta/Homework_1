@@ -1,0 +1,84 @@
+:root{
+    --secondary: #72d89ec1;
+    --complement: #126938c1;
+    --font: white;
+  }
+  .multi-button{
+    display: flex;
+    flex-direction: row;
+    background-color: var(--complement);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px #11111150;
+    border-radius: 10px;
+  }
+  
+  .multi-button_button{
+    font-family: "input";
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    padding: 20px 30px;
+    color: var(--font);
+    transition: background 0.3s ease-in-out;
+    background-color: var(--secondary);
+  }
+  
+  .multi-button_button:focus{
+    outline: 5px solid var(--font);
+  }
+  
+  .multi-button_button:hover{
+    background-color: var(--complement);
+    color: var(--secondary);
+  }
+  
+  .multi-button_button:first-child{
+    border-radius: 10px 0 0 10px;
+  }
+  
+  .multi-button_button:last-child{
+    border-radius: 0 10px 10px 0;
+  }
+  
+  .multi-button_button:first-child,
+  .multi-button_button:last-child{
+    transition: none;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .multi-button_button:first-child:hover,
+  .multi-button_button:last-child:hover{
+    background-color: var(--secondary);
+    color: var(--font);
+  }
+  
+  .multi-button_button:first-child::after,
+  .multi-button_button:last-child::after{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 20%;
+    background-color: var(--complement);
+    top: 0;
+  }
+  
+  .multi-button_button:first-child::after{
+    right: -20%;
+    border-radius: 50% 0 0 50%;
+    transition: right ease-in-out 0.2s;
+  }
+  
+  .multi-button_button:last-child::after{
+    left: -20%;
+    border-radius: 0 50% 50% 0;
+    transition: left ease-in-out 0.2s;
+  }
+  
+  .multi-button_button:first-child:hover::after{
+    right: 0;
+  }
+  
+  .multi-button_button:last-child:hover::after{
+    left: 0;
+  }
