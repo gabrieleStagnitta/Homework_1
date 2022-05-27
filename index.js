@@ -54,25 +54,42 @@ function setNumLike(nomeSquadra){
 function printCalciatori(calciatori,nomeSquadra){
     const tbody = document.getElementById("body"+nomeSquadra);
     tbody.innerHTML = '';
-    for(let calciatore of calciatori)
-    {
+
+    if(calciatori.length<=0){
         const tr=document.createElement("tr");
         const tdRuolo=document.createElement("td");
         const tdNome=document.createElement("td");
         const tdSquadra=document.createElement("td");
         const tdValore=document.createElement("td");
-
-        tdRuolo.textContent = calciatore.ruolo;
-        tdNome.textContent = calciatore.nome;
-        tdSquadra.textContent = calciatore.squadra;
-        tdValore.textContent = calciatore.quotazione;
-
+        tdRuolo.textContent = "-";
+        tdNome.textContent = "-";
+        tdSquadra.textContent = "-";
+        tdValore.textContent = "-";
         tr.appendChild(tdRuolo);
         tr.appendChild(tdNome);
         tr.appendChild(tdSquadra);
         tr.appendChild(tdValore);
-
         tbody.appendChild(tr);
+        return;
+    }
+    else{
+        for(let calciatore of calciatori){
+            const tr=document.createElement("tr");
+            const tdRuolo=document.createElement("td");
+            const tdNome=document.createElement("td");
+            const tdSquadra=document.createElement("td");
+            const tdValore=document.createElement("td");
+            tdRuolo.textContent = calciatore.ruolo;
+            tdNome.textContent = calciatore.nome;
+            tdSquadra.textContent = calciatore.squadra;
+            tdValore.textContent = calciatore.quotazione;
+            tr.appendChild(tdRuolo);
+            tr.appendChild(tdNome);
+            tr.appendChild(tdSquadra);
+            tr.appendChild(tdValore);
+            tbody.appendChild(tr);
+        }
+        return;
     }
 }
 
@@ -87,8 +104,21 @@ function printSquadre(squadre){
         const profileDiv = document.createElement("div");
         profileDiv.classList.add("profileDiv");
 
+        const profileDivLeft = document.createElement("div");
+        const profileDivRight= document.createElement("div");
+
+        profileDivLeft.classList.add("profileDivLeft");
+        profileDivRight.classList.add("profileDivRight");
+
         const nomeSquadra= document.createElement("h1");
         nomeSquadra.textContent = squadra.nome;
+        const nomeFantaallenatore = document.createElement("h2");
+        nomeFantaallenatore.innerText = squadra.nickname;
+
+        const nomiDiv=document.createElement("div");
+        nomiDiv.appendChild(nomeSquadra);
+        nomiDiv.appendChild(nomeFantaallenatore);
+        nomiDiv.classList.add("nomiDiv");
 
         const logo = document.createElement("img");
         if(!checkFileExist("upload/logos/"+squadra.nome+".jpg"))    logo.src = "upload/logos/default.jpg"
@@ -103,10 +133,13 @@ function printSquadre(squadre){
         numLike.id="numLike"+squadra.nome;
         setNumLike(squadra.nome);
 
-        profileDiv.appendChild(logo);
-        profileDiv.appendChild(nomeSquadra);
-        profileDiv.appendChild(numLike);
-        profileDiv.appendChild(like);
+        profileDivLeft.appendChild(logo);
+        profileDivLeft.appendChild(nomiDiv);
+        profileDivRight.appendChild(numLike);
+        profileDivRight.appendChild(like);
+        
+        profileDiv.appendChild(profileDivLeft);
+        profileDiv.appendChild(profileDivRight);
 
         const table=document.createElement("table");
         table.classList.add("fl-table");

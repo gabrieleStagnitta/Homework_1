@@ -12,6 +12,6 @@
     $nome = mysqli_fetch_assoc($res)['nome'];
     mysqli_free_result($res);
     mysqli_close($conn);
-
-    echo json_encode($nome);
+    
+    echo json_encode([$nome,$nickname]);
 ?>

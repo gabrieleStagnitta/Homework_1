@@ -58,6 +58,7 @@ function recoveryValidation(event){
     }    
 }
 
+
 function recoverPassword(){
     document.getElementById("newPasswordDiv").classList.remove("hidden");
 }

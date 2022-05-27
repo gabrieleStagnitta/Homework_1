@@ -24,7 +24,6 @@
     <head>
         <script src='formazione.js' defer></script>
         <link rel="stylesheet" href="mainStyle.css">
-        <link rel="stylesheet" href="contentPage.css">
         <link rel="stylesheet" href="tables.css">
         <link rel="stylesheet" href="navdiv.css">
     </head>
@@ -35,12 +34,15 @@
         <button class="multi-button_button" onclick="location.href='logout.php';">Logout</button>
       </div>
       <div>
-          <h3 id="nomeSquadra"></h3>
-          <input type="button" onclick="location.href='aggiornaformazione.php';" value="Inserisci nuovi calciatori"/>
+          <div class="nomiDiv">
+            <h1 id="nomeSquadra"></h1>
+            <h1 id="nickname"></h1>
+          </div>
+          <input type="button" onclick="location.href='aggiornaformazione.php';" value="Inserisci nuovi calciatori"></input>
           <input type="button" onclick="deleteTeam()" value="Elimina squadra"></input>
           <input type="button" onclick="location.href='leghe.php';" value="Guarda leghe"></input>
       </div>
-      <h3>Formazione:</h3>
+      <h1 class="title">Formazione:</h1>
       <div id="squadra">
       </div>
     </body>

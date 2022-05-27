@@ -12,8 +12,8 @@
     <title>Homework1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src='index.js' defer></script>
+    <link rel="stylesheet" href="navdiv.css">
     <link rel="stylesheet" href="mainStyle.css">
-    <link rel="stylesheet" href="contentPage.css">
     <link rel="stylesheet" href="tables.css">
     <link rel="stylesheet" href="navdiv.css">
   </head>
@@ -26,7 +26,7 @@
     </div>
   </div>
     <section>
-        <h1>Formazioni</h1>
+        <h1 class="title">SQUADRE</h1>
         <div id="squadre">
         </div>
     </section>

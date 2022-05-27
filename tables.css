@@ -2,15 +2,11 @@
     margin: 10px 70px 70px;
     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
 }
-/*
-.table-wrapper p{
 
+td{
+    font-family: 'input',sans-serif;
 }
 
-.table-wrapper h1{
-    
-}
-*/
 .fl-table {
     border-radius: 5px;
     font-size: 12px;
@@ -130,4 +126,26 @@
 
 .exit:hover{
     background-color: orange;
+}
+
+.profileDiv{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    background-color: #46193338;
+}
+
+.profileDivLeft{
+    display: flex;
+    width: 250px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.profileDivRight{
+    display: flex;
+    width: 250px;
+    justify-content: center;
 }

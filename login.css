@@ -54,6 +54,15 @@ body{
 #chk:checked ~ .signup label{
 	transform: scale(.6);
 }
+
+#chk:checked ~ .logerror{
+	transform: translateY(-550px);
+}
+
+.mainError{
+	height: 575px;
+}
+
 .icon{
 	width:100px;
 	height:0px;

@@ -85,7 +85,7 @@
     
     </head>
     <body>
-    <div class="main">  	
+    <div class="main <?php if(isset($sameName) || isset($sameNickname)) echo "mainError";?>">  	
 		<input type="checkbox" id="chk" aria-hidden="true">
 			<div class="signup">
 				<form name="signup" method='post'>
@@ -105,7 +105,7 @@
 				</form>
 			</div>
 
-			<div class="login">
+			<div class="login <?php if(isset($sameName) || isset($sameNickname)) echo "logError";?>">
 				<form name="login" method='post'>
 					<label for="chk" aria-hidden="true">Login</label>
 					<input type="text" name="logNickname" placeholder="Nickname">
