@@ -15,6 +15,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+drop database IF EXISTS torneo;
+create database torneo;
+
+use torneo;
+
 --
 -- Table structure for table `calciatore`
 --
@@ -136,9 +141,12 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `fantaCrediti` AFTER INSERT ON `fs_calciatore` FOR EACH ROW UPDATE fantasquadra SET crediti = crediti - (	SELECT quotazione
-													from calciatore
-													where calciatore.id = new.idCalciatore)
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `fantaCrediti` AFTER INSERT ON `fs_calciatore` FOR EACH ROW UPDATE fantasquadra SET crediti = crediti - (	SELECT quotazione
+
+													from calciatore
+
+													where calciatore.id = new.idCalciatore)
+
                                                     WHERE fantasquadra.idFantasquadra = new.idFantaSquadra */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
