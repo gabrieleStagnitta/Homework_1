@@ -11,15 +11,15 @@ function uploadFile() {
             body:formData
         }).then(response => response.text())
         .then(text => {
-            if(text!=1) alert("Inserimento non avvenuto con successo");
+            if(text!=1) alert("Selezionare un file jpg, png o jpg");
+            else        location.href='formazione.php'; 
         });
     }else{
-       alert("Please select a file");
+       alert("Selezionare un file...");
     }
 }
 
 function createTeam(event){
-    event.preventDefault();
     if(signForm.nomeSquadra.value.length == 0){
         alert("Compilare tutti i campi");
         event.preventDefault();
@@ -31,7 +31,7 @@ function createTeam(event){
     else{
         fetch("http://localhost/homework1/api_rest/uploadTeam.php?nomeSquadra="+signForm.nomeSquadra.value)
             .then(response => response.text())
-            .then(text => { if(true) uploadFile();});
+            .then(text => { if(text==true) uploadFile();});
     }
 }
 

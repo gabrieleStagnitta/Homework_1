@@ -136,9 +136,12 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `fantaCrediti` AFTER INSERT ON `fs_calciatore` FOR EACH ROW UPDATE fantasquadra SET crediti = crediti - (	SELECT quotazione
-													from calciatore
-													where calciatore.id = new.idCalciatore)
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `fantaCrediti` AFTER INSERT ON `fs_calciatore` FOR EACH ROW UPDATE fantasquadra SET crediti = crediti - (	SELECT quotazione
+
+													from calciatore
+
+													where calciatore.id = new.idCalciatore)
+
                                                     WHERE fantasquadra.idFantasquadra = new.idFantaSquadra */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -261,3 +264,43 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-05-27  0:44:35
+
+delimiter //
+    CREATE PROCEDURE eliminaTeam(IN nick varchar(255))
+    BEGIN
+        SET @idSquadra = (SELECT fantaallenatore.idFantasquadra FROM fantaallenatore WHERE fantaallenatore.nickname=nick);
+        UPDATE fantaallenatore SET fantaallenatore.idFantasquadra = NULL WHERE fantaallenatore.nickname=nick;
+        DELETE FROM fantasquadra WHERE fantasquadra.idFantasquadra=@idSquadra;
+        DELETE FROM likefantasquadra WHERE likefantasquadra.idFantaSquadra=@idSquadra;
+        DELETE FROM fs_calciatore WHERE fs_calciatore.idFantaSquadra=@idSquadra;
+        DELETE FROM iscrizionelega where iscrizionelega.idFantasquadra=@idSquadra;
+    END//
+    DELIMITER ;
+
+delimiter //
+    create procedure likeFS (IN nickname varchar(25),IN fantaS varchar(25))
+    BEGIN
+    SET @idAllenatore = (SELECT fantaallenatore.id from fantaallenatore where fantaallenatore.nickname=nickname);
+    SET @idSquadra = (SELECT fantasquadra.idFantasquadra from fantasquadra where fantasquadra.nome = fantaS);
+    SET @isLiked = ( 
+	SELECT count(*) 
+    FROM likefantasquadra
+    WHERE likefantasquadra.idFantaSquadra = @idSquadra and likefantasquadra.idFantaAllenatore = @idAllenatore);
+    IF	@isLiked = 0	 THEN INSERT INTO likefantasquadra values (@idAllenatore,@idSquadra);
+    ELSE 				 DELETE FROM likefantasquadra WHERE likefantasquadra.idFantaAllenatore=@idAllenatore and likefantasquadra.idFantaSquadra=@idSquadra;
+    END IF;
+    END//
+    delimiter ;
+
+delimiter //
+        CREATE PROCEDURE nuovoTeam (IN nickname varchar(25), IN nomeSquadra varchar(25))
+        BEGIN
+	        DECLARE num int DEFAULT 0;
+            SET num = 1 + (SELECT fantasquadra.idFantasquadra from fantasquadra GROUP by fantasquadra.idFantasquadra desc limit 1);
+	        INSERT INTO fantasquadra
+    	        VALUES (num,nomeSquadra,500);
+	        UPDATE fantaallenatore
+    	        SET fantaallenatore.idFantasquadra = num
+                WHERE fantaallenatore.nickname = nickname;
+        END//
+        delimiter ; 

@@ -6,8 +6,6 @@
         "",
         "torneo"
     ) or die("Errore: ".mysqli_connect_error());
-    // $nickname = mysqli_real_escape_string($conn,$_POST["nickname"]);
-    // $newPassword=password_hash(mysqli_real_escape_string($conn,$_POST["password"]),PASSWORD_BCRYPT);
     $content = trim(file_get_contents("php://input"));
     $_arr = json_decode($content,true);
     $nickname = mysqli_real_escape_string($conn,$_arr["nickname"]);

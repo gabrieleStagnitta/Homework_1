@@ -38,6 +38,7 @@
       <div class="box">
         <div>
             <h3 id="nomeSquadra"></h3>
+            <input type="button" onclick="location.href='formazione.php';" value="Guarda la tua formazione"></input>
             <input type="button" id="go" value="Crea lega"></input>
         </div>
         <h1>Leghe</h1>

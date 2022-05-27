@@ -83,8 +83,7 @@ function getCalciatori(){
 fetch("http://localhost/homework1/api_rest/getNomeSquadra.php")
     .then(response => response.json())
     .then(data => {
-        document.getElementById("nickname").innerHTML = "Nickname: "+data[1];
-        document.getElementById("nomeSquadra").innerHTML = "Nome squadra: "+data[0];
+        document.getElementById("title").innerHTML = data[0]+", di "+data[1];
     });
 getCalciatori();
 

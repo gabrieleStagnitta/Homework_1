@@ -15,30 +15,34 @@ function play(event){
     }
 }
 
-
-
 function showData(json){
-    let h1;
+    let p;
     let button;
     let buttonPlay;
+    let buttonsDiv;
     let div;
     let podcast=document.getElementById("podcast");
     let i=0;
     json.forEach(episode => {
-        //episode.name, episode.preview, episode.link
         div=document.createElement("div");
+        div.classList.add("episodio");
+
+        buttonsDiv=document.createElement("div");
+        buttonsDiv.classList.add("buttonsDiv");
         
-        h1=document.createElement("h1");
+        p=document.createElement("p");
         button=document.createElement("button");
         buttonPlay=document.createElement("button");
+
+        buttonsDiv.appendChild(buttonPlay);
+        buttonsDiv.appendChild(button);
         
-        h1.textContent=episode.name;
+        p.textContent=episode.name;
         button.textContent="Link puntata";
         buttonPlay.textContent="Ascolta la preview"
 
-        div.append(h1);
-        div.appendChild(buttonPlay);
-        div.appendChild(button);
+        div.append(p);
+        div.append(buttonsDiv);
 
         buttonPlay.addEventListener('click',play);
         podcast.appendChild(div);

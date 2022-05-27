@@ -23,7 +23,7 @@
         <div>
             <input type="button" onclick="location.href='formazione.php';" value="Ritorna alla tua squadra attuale"/>
         </div>
-        <h3>Scegli i calciatori: </h3>
+        <h1 class="title">Scegli i calciatori: </h3>
         <div>
           <input placeholder="Cerca per nome calciatore" id="cercaPerNome"/>
           <input placeholder="Cerca per nome squadra" id="cercaPerSquadra"/>

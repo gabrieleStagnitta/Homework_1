@@ -21,6 +21,7 @@ function printCalciatori(calciatori){
     const thNome=document.createElement("th");
     const thSquadra=document.createElement("th");
     const thValore=document.createElement("th");
+    const thAggiungi=document.createElement("th");
     const tbody=document.createElement("tbody");
     thRuolo.innerText="Ruolo";
     tr.appendChild(thRuolo);
@@ -30,6 +31,9 @@ function printCalciatori(calciatori){
     tr.appendChild(thSquadra);
     thValore.innerText="Valore";
     tr.appendChild(thValore);
+    thAggiungi.innerText="Aggiungi calciatore";
+    tr.appendChild(thAggiungi);
+
     thead.appendChild(tr);
     table.appendChild(thead);
         
@@ -43,15 +47,21 @@ function printCalciatori(calciatori){
         const tdNome=document.createElement("td");
         const tdSquadra=document.createElement("td");
         const tdValore=document.createElement("td");
+        const tdAggiungi=document.createElement("td");
 
         tdRuolo.textContent = calciatore.ruolo;
         tdNome.textContent = calciatore.nome;
         tdSquadra.textContent = calciatore.squadra;
         tdValore.textContent = calciatore.quotazione;
+        tdAggiungi.textContent = "x";
+        tdAggiungi.classList.add("enter");
+        tdAggiungi.dataset.idCalciatore=calciatore.id;
+        tdAggiungi.addEventListener("click",aggiungiAllaRosa);
         tr.appendChild(tdRuolo);
         tr.appendChild(tdNome);
         tr.appendChild(tdSquadra);
         tr.appendChild(tdValore);
+        tr.appendChild(tdAggiungi);
 
         tbody.appendChild(tr);
     }

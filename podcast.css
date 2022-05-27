@@ -1,0 +1,21 @@
+.buttonsDiv{
+    display: flex;
+    justify-content: center;
+ }
+ 
+ .buttonsDiv button{
+     width:25%;
+ }
+ 
+ div.episodio{
+     background-color: #46193338;
+ }
+ div.episodio p{
+    padding-top:10px;
+     display: flex;
+    justify-content: center;
+ }
+
+ h1{
+    text-align: center;
+   }
