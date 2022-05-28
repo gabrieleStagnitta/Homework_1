@@ -65,6 +65,10 @@ p,h1,h2{
 	color: #fff;
 }
 
+p{
+	text-align: center;
+}
+
 h1{
 	letter-spacing:5px;
 	font-weight:normal;

@@ -10,7 +10,7 @@ function rimuoviDallaRosa(event){
 }
 
 function printCalciatori(calciatori){
-    const div = document.getElementById("squadra");
+    const div = document.getElementById("Squadra");
     div.innerHTML="";
     const teamDiv=document.createElement("div");
     teamDiv.id="div";
@@ -26,19 +26,33 @@ function printCalciatori(calciatori){
     const thValore=document.createElement("th");
     const thDelete=document.createElement("th");
     const tbody=document.createElement("tbody");
+    
     thRuolo.innerText="Ruolo";
+    thRuolo.addEventListener("click",getCalciatori);
+    thRuolo.id="ruolo";
     tr.appendChild(thRuolo);
+
     thNome.innerText="Nome";
+    thNome.addEventListener("click",getCalciatori);
+    thNome.id="nome";
     tr.appendChild(thNome);
+
     thSquadra.innerText="Squadra";
+    thSquadra.addEventListener("click",getCalciatori);
+    thSquadra.id="squadra";
     tr.appendChild(thSquadra);
+
     thValore.innerText="Valore";
+    thValore.addEventListener("click",getCalciatori);
+    thValore.id="valore";
     tr.appendChild(thValore);
-    thDelete.innerText="RIMUOVI CALCIATORE";
+
+    thDelete.innerText="Rimuovi calciatore";
     tr.appendChild(thDelete);
+    
     thead.appendChild(tr);
     table.appendChild(thead);
-        
+    
     tbody.id="body";
     table.appendChild(tbody);
 
@@ -71,11 +85,32 @@ function printCalciatori(calciatori){
     teamDiv.appendChild(table);
 
     div.appendChild(teamDiv);
+    document.getElementById(target).innerText+=" ⇊ ";
+    
 }
 
 
-function getCalciatori(){
-    fetch("http://localhost/homework1/api_rest/getCalciatoriSquadra.php")
+function getCalciatori(event){
+    //tipo 1 ordina per squadra
+    //tipo 2 ordina per nome
+    //tipo 3 ordina per crediti
+    //tipo 4 ordina per ruolo
+    if(!(typeof event === 'undefined')){
+        target=event.target.id;
+        if(event.target.id=="squadra"){
+            type=1;
+        }
+        else if(event.target.id=="nome"){
+            type=2;
+        }
+        else if(event.target.id=="valore"){
+            type=3;
+        }
+        else if(event.target.id=="ruolo"){
+            type=4;
+        }
+    }
+    fetch("http://localhost/homework1/api_rest/getCalciatoriSquadra.php?type="+type)
     .then(response => response.json())
     .then(data => printCalciatori(data));
 }
@@ -85,6 +120,9 @@ fetch("http://localhost/homework1/api_rest/getNomeSquadra.php")
     .then(data => {
         document.getElementById("title").innerHTML = data[0]+", di "+data[1];
     });
+
+let type=1;
+let target="squadra";    
 getCalciatori();
 
 

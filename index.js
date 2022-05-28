@@ -23,11 +23,9 @@ function likeSquadra(event){
 function likeManager(data,like){
     setNumLike(like.dataset.squadra);
     if(data){
-        //like.style.background='#00FF00';
         like.textContent= "Unlike";
     }
     else{
-        //like.style.background='#FF0000';
         like.textContent= "Like";
     }
 }
@@ -93,6 +91,32 @@ function printCalciatori(calciatori,nomeSquadra){
     }
 }
 
+function rePrintCalciatori(event){
+    let nomeSquadra=event.target.dataset.nomeFantaSquadra;
+    document.getElementById("squadra"+nomeSquadra).innerText="Squadra";
+    document.getElementById("nome"+nomeSquadra).innerText="Nome";
+    document.getElementById("valore"+nomeSquadra).innerText="Valore";
+    document.getElementById("ruolo"+nomeSquadra).innerText="Ruolo";
+    event.target.innerText+=" ⇊ ";
+    if(event.target.id=="squadra"+nomeSquadra){
+        type=1;
+    }
+    else if(event.target.id=="nome"+nomeSquadra){
+        type=2;
+    }
+    else if(event.target.id=="valore"+nomeSquadra){
+        type=3;
+    }
+    else if(event.target.id=="ruolo"+nomeSquadra){
+        type=4;
+    }
+    
+    let nickname=event.target.dataset.nickname;
+    fetch("http://localhost/homework1/api_rest/getCalciatoriSquadra.php?nickname="+nickname+"&type="+type)
+        .then(response => response.json())
+        .then(data => printCalciatori(data,nomeSquadra));
+}
+
 function printSquadre(squadre){
     const div = document.getElementById("squadre");
     for(let squadra of squadre){
@@ -128,7 +152,6 @@ function printSquadre(squadre){
         const like = addLikeButton(squadra.nome);
         const numLike = document.createElement("p");
         
-        numLike.textContent;
         numLike.dataset.squadra = squadra.nome;
         numLike.id="numLike"+squadra.nome;
         setNumLike(squadra.nome);
@@ -151,20 +174,41 @@ function printSquadre(squadre){
         const thValore=document.createElement("th");
         const tbody=document.createElement("tbody");
         thRuolo.innerText="Ruolo";
+    
+        thRuolo.addEventListener("click",rePrintCalciatori);
+        thRuolo.id="ruolo"+squadra.nome;
+        thRuolo.dataset.nomeFantaSquadra=squadra.nome;
+        thRuolo.dataset.nickname=squadra.nickname;
         tr.appendChild(thRuolo);
+
         thNome.innerText="Nome";
+        thNome.addEventListener("click",rePrintCalciatori);
+        thNome.id="nome"+squadra.nome;
+        thNome.dataset.nomeFantaSquadra=squadra.nome;
+        thNome.dataset.nickname=squadra.nickname;
         tr.appendChild(thNome);
-        thSquadra.innerText="Squadra";
+
+        thSquadra.innerText="Squadra ⇊ ";
+        thSquadra.addEventListener("click",rePrintCalciatori);
+        thSquadra.id="squadra"+squadra.nome;
+        thSquadra.dataset.nomeFantaSquadra=squadra.nome;
+        thSquadra.dataset.nickname=squadra.nickname;
         tr.appendChild(thSquadra);
+
         thValore.innerText="Valore";
+        thValore.addEventListener("click",rePrintCalciatori);
+        thValore.id="valore"+squadra.nome;
+        thValore.dataset.nomeFantaSquadra=squadra.nome;
+        thValore.dataset.nickname=squadra.nickname;
         tr.appendChild(thValore);
+
         thead.appendChild(tr);
         table.appendChild(thead);
         
         tbody.id="body"+squadra.nome;
         table.appendChild(tbody);
 
-        fetch("http://localhost/homework1/api_rest/getCalciatoriSquadra.php?nickname="+squadra.nickname)
+        fetch("http://localhost/homework1/api_rest/getCalciatoriSquadra.php?nickname="+squadra.nickname+"&type="+type)
             .then(response => response.json())
             .then(data => printCalciatori(data,squadra.nome));
 
@@ -174,6 +218,8 @@ function printSquadre(squadre){
         div.appendChild(teamDiv);
     }
 }
+
+let type=1;
 
 fetch("http://localhost/homework1/api_rest/getNomiSquadre.php")
     .then(response => response.json())

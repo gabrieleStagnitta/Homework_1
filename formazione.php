@@ -38,8 +38,9 @@
           <input type="button" onclick="deleteTeam()" value="Elimina squadra"></input>
           <input type="button" onclick="location.href='leghe.php';" value="Guarda leghe"></input>
       </div>
-      <h1 class="title" id="title">Formazione:</h1>
-      <div id="squadra">
+      <h1 class="title" id="title"></h1>
+      <p>Clicca sui campi della tabella per cambiarne l'ordine di visualizzazione</p>
+      <div id="Squadra">
       </div>
     </body>
 </html>

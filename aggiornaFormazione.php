@@ -10,7 +10,6 @@
     <head>
         <script src='aggiornaformazione.js' defer></script>
         <link rel="stylesheet" href="mainStyle.css">
-        <link rel="stylesheet" href="contentPage.css">
         <link rel="stylesheet" href="tables.css">
         <link rel="stylesheet" href="navdiv.css">
     </head>
@@ -27,6 +26,7 @@
         <div>
           <input placeholder="Cerca per nome calciatore" id="cercaPerNome"/>
           <input placeholder="Cerca per nome squadra" id="cercaPerSquadra"/>
+          <p>Clicca sui campi della tabella per cambiarne l'ordine di visualizzazione</p>
         </div>
         <div id="calciatori">
         </div>

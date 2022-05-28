@@ -27,6 +27,7 @@
   </div>
     <section>
         <h1 class="title">SQUADRE</h1>
+        <p>Clicca sui campi della tabella per cambiarne l'ordine di visualizzazione</p>
         <div id="squadre">
         </div>
     </section>

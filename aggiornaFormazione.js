@@ -23,14 +23,27 @@ function printCalciatori(calciatori){
     const thValore=document.createElement("th");
     const thAggiungi=document.createElement("th");
     const tbody=document.createElement("tbody");
+
     thRuolo.innerText="Ruolo";
+    thRuolo.addEventListener("click",getSomeCalciatori);
+    thRuolo.id="ruolo";
     tr.appendChild(thRuolo);
+
     thNome.innerText="Nome";
+    thNome.addEventListener("click",getSomeCalciatori);
+    thNome.id="nome";
     tr.appendChild(thNome);
+
     thSquadra.innerText="Squadra";
+    thSquadra.addEventListener("click",getSomeCalciatori);
+    thSquadra.id="squadra";
     tr.appendChild(thSquadra);
+
     thValore.innerText="Valore";
+    thValore.addEventListener("click",getSomeCalciatori);
+    thValore.id="valore";
     tr.appendChild(thValore);
+
     thAggiungi.innerText="Aggiungi calciatore";
     tr.appendChild(thAggiungi);
 
@@ -69,25 +82,67 @@ function printCalciatori(calciatori){
     calciatoriDiv.appendChild(table);
 
     div.appendChild(calciatoriDiv);
-
+    document.getElementById(target).innerText+=" ⇊ ";
 }
 
 function getCalciatori(){
     fetch("http://localhost/homework1/api_rest/getCalciatori.php")
         .then(response => response.json())
         .then(data => printCalciatori(data));
+    type=1;
+    nome="";
 }
 
 function getSomeCalciatori(event){
+    //tipo 1 ordina per squadra, cerca per nome
+    //tipo 2 ordina per nome, cerca per nome
+    //tipo 3 ordina per crediti, cerca per nome
+    //tipo 4 ordina per ruolo, cerca per nome
+    //tipo 5 ordina per squadra, cerca per squadra
+    //tipo 6 ordina per nome, cerca per squadra
+    //tipo 7 ordina per crediti, cerca per squadra
+    //tipo 8 ordina per ruolo, cerca per squadra
     let link;
-    let nome=event.target.value;
-    if(event.target.id=="cercaPerNome")  link="http://localhost/homework1/api_rest/getCalciatori.php?nome="+nome+"&type=1";
-    else                                 link="http://localhost/homework1/api_rest/getCalciatori.php?nome="+nome+"&type=2";    
+    if(event.target.id=="cercaPerNome"){
+        if(type>=5)    type=type-4;
+        perNome=true;
+        nome=event.target.value;
+    }
+    else if(event.target.id=="cercaPerSquadra"){
+        if(type<5)  type=type+4;
+        perNome=false;
+        nome=event.target.value;
+    }
+    else if(event.target.id=="ruolo"){
+        target=event.target.id;
+        if(perNome) type=4;
+        else        type=8;
+    }
+    else if(event.target.id=="squadra"){
+        target=event.target.id;
+        if(perNome) type=1;
+        else        type=5;
+    }
+    else if(event.target.id=="nome"){
+        target=event.target.id;
+        if(perNome) type=2;
+        else        type=6;
+    }
+    else if(event.target.id=="valore"){
+        target=event.target.id;
+        if(perNome) type=3;
+        else        type=7;
+    }
+    link="http://localhost/homework1/api_rest/getCalciatori.php?nome="+nome+"&type="+type;
     fetch(link)
     .then(response => response.json())
     .then(data => printCalciatori(data));       
 }
 
+let type=1;
+let nome="";
+let perNome=true;
+let target="squadra";
 
 getCalciatori();
 const cercaPerNome = document.getElementById('cercaPerNome');
